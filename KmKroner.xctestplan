@@ -1,0 +1,43 @@
+{
+  "configurations": [
+    {
+      "id": "8C1F2E6A-4B7D-4E21-9A3C-5D6E7F809A1B",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "codeCoverage": true,
+    "targetForVariableExpansion": {
+      "containerPath": "container:KmKroner.xcodeproj",
+      "identifier": "AC2088B13099124A00DED3ED",
+      "name": "KmKroner"
+    }
+  },
+  "testTargets": [
+    {
+      "parallelizable": true,
+      "target": {
+        "containerPath": "container:KmKroner.xcodeproj",
+        "identifier": "AC2088DF3099124A00DED3ED",
+        "name": "KmKronerTests"
+      }
+    },
+    {
+      "parallelizable": true,
+      "target": {
+        "containerPath": "container:DeductionEngine",
+        "identifier": "DeductionEngineTests",
+        "name": "DeductionEngineTests"
+      }
+    },
+    {
+      "target": {
+        "containerPath": "container:KmKroner.xcodeproj",
+        "identifier": "AC2088E03099124A00DED3ED",
+        "name": "KmKronerUITests"
+      }
+    }
+  ],
+  "version": 1
+}

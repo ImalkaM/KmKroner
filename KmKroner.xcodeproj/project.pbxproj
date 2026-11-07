@@ -10,14 +10,43 @@
 		AC2088C03099124A00DED3ED /* DeductionEngine in Frameworks */ = {isa = PBXBuildFile; productRef = AC2088C23099124A00DED3ED /* DeductionEngine */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AC2088D53099124A00DED3ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC2088AA3099124A00DED3ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2088B13099124A00DED3ED;
+			remoteInfo = KmKroner;
+		};
+		AC2088D63099124A00DED3ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC2088AA3099124A00DED3ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2088B13099124A00DED3ED;
+			remoteInfo = KmKroner;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AC2088B23099124A00DED3ED /* KmKroner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KmKroner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2088D13099124A00DED3ED /* KmKronerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KmKronerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2088D23099124A00DED3ED /* KmKronerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KmKronerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AC2088B43099124A00DED3ED /* KmKroner */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = KmKroner;
+			sourceTree = "<group>";
+		};
+		AC2088D33099124A00DED3ED /* KmKronerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = KmKronerTests;
+			sourceTree = "<group>";
+		};
+		AC2088D43099124A00DED3ED /* KmKronerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = KmKronerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -29,6 +58,16 @@
 				AC2088C03099124A00DED3ED /* DeductionEngine in Frameworks */,
 			);
 		};
+		AC2088DA3099124A00DED3ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		AC2088DD3099124A00DED3ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -36,6 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				AC2088B43099124A00DED3ED /* KmKroner */,
+				AC2088D33099124A00DED3ED /* KmKronerTests */,
+				AC2088D43099124A00DED3ED /* KmKronerUITests */,
 				AC2088B33099124A00DED3ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				AC2088B23099124A00DED3ED /* KmKroner.app */,
+				AC2088D13099124A00DED3ED /* KmKronerTests.xctest */,
+				AC2088D23099124A00DED3ED /* KmKronerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +115,48 @@
 			productReference = AC2088B23099124A00DED3ED /* KmKroner.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AC2088DF3099124A00DED3ED /* KmKronerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2088E13099124A00DED3ED /* Build configuration list for PBXNativeTarget "KmKronerTests" */;
+			buildPhases = (
+				AC2088D93099124A00DED3ED /* Sources */,
+				AC2088DA3099124A00DED3ED /* Frameworks */,
+				AC2088DB3099124A00DED3ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC2088D73099124A00DED3ED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AC2088D33099124A00DED3ED /* KmKronerTests */,
+			);
+			name = KmKronerTests;
+			productName = KmKronerTests;
+			productReference = AC2088D13099124A00DED3ED /* KmKronerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC2088E03099124A00DED3ED /* KmKronerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2088E43099124A00DED3ED /* Build configuration list for PBXNativeTarget "KmKronerUITests" */;
+			buildPhases = (
+				AC2088DC3099124A00DED3ED /* Sources */,
+				AC2088DD3099124A00DED3ED /* Frameworks */,
+				AC2088DE3099124A00DED3ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC2088D83099124A00DED3ED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AC2088D43099124A00DED3ED /* KmKronerUITests */,
+			);
+			name = KmKronerUITests;
+			productName = KmKronerUITests;
+			productReference = AC2088D23099124A00DED3ED /* KmKronerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -84,6 +169,14 @@
 				TargetAttributes = {
 					AC2088B13099124A00DED3ED = {
 						CreatedOnToolsVersion = 27.0;
+					};
+					AC2088DF3099124A00DED3ED = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = AC2088B13099124A00DED3ED;
+					};
+					AC2088E03099124A00DED3ED = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = AC2088B13099124A00DED3ED;
 					};
 				};
 			};
@@ -105,12 +198,24 @@
 			projectRoot = "";
 			targets = (
 				AC2088B13099124A00DED3ED /* KmKroner */,
+				AC2088DF3099124A00DED3ED /* KmKronerTests */,
+				AC2088E03099124A00DED3ED /* KmKronerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AC2088B03099124A00DED3ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		AC2088DB3099124A00DED3ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		AC2088DE3099124A00DED3ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -123,7 +228,30 @@
 			files = (
 			);
 		};
+		AC2088D93099124A00DED3ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		AC2088DC3099124A00DED3ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC2088D73099124A00DED3ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2088B13099124A00DED3ED /* KmKroner */;
+			targetProxy = AC2088D53099124A00DED3ED /* PBXContainerItemProxy */;
+		};
+		AC2088D83099124A00DED3ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2088B13099124A00DED3ED /* KmKroner */;
+			targetProxy = AC2088D63099124A00DED3ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AC2088BB3099124C00DED3ED /* Debug configuration for PBXProject "KmKroner" */ = {
@@ -334,6 +462,96 @@
 			};
 			name = Release;
 		};
+		AC2088E23099124A00DED3ED /* Debug configuration for PBXNativeTarget "KmKronerTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KGAJ3TRK78;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.udayanga.KmKronerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KmKroner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KmKroner";
+			};
+			name = Debug;
+		};
+		AC2088E33099124A00DED3ED /* Release configuration for PBXNativeTarget "KmKronerTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KGAJ3TRK78;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.udayanga.KmKronerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KmKroner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KmKroner";
+			};
+			name = Release;
+		};
+		AC2088E53099124A00DED3ED /* Debug configuration for PBXNativeTarget "KmKronerUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KGAJ3TRK78;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.udayanga.KmKronerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = KmKroner;
+			};
+			name = Debug;
+		};
+		AC2088E63099124A00DED3ED /* Release configuration for PBXNativeTarget "KmKronerUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KGAJ3TRK78;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.udayanga.KmKronerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = KmKroner;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -350,6 +568,22 @@
 			buildConfigurations = (
 				AC2088BE3099124C00DED3ED /* Debug configuration for PBXNativeTarget "KmKroner" */,
 				AC2088BF3099124C00DED3ED /* Release configuration for PBXNativeTarget "KmKroner" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		AC2088E13099124A00DED3ED /* Build configuration list for PBXNativeTarget "KmKronerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2088E23099124A00DED3ED /* Debug configuration for PBXNativeTarget "KmKronerTests" */,
+				AC2088E33099124A00DED3ED /* Release configuration for PBXNativeTarget "KmKronerTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		AC2088E43099124A00DED3ED /* Build configuration list for PBXNativeTarget "KmKronerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2088E53099124A00DED3ED /* Debug configuration for PBXNativeTarget "KmKronerUITests" */,
+				AC2088E63099124A00DED3ED /* Release configuration for PBXNativeTarget "KmKronerUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};

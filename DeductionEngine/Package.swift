@@ -17,6 +17,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "DeductionEngine"),
+        .testTarget(name: "DeductionEngineTests", dependencies: ["DeductionEngine"]),
     ],
     // Match the app: Swift 5 language mode.
     swiftLanguageModes: [.v5]
