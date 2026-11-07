@@ -6,6 +6,10 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AC2088C03099124A00DED3ED /* DeductionEngine in Frameworks */ = {isa = PBXBuildFile; productRef = AC2088C23099124A00DED3ED /* DeductionEngine */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AC2088B23099124A00DED3ED /* KmKroner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KmKroner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -22,6 +26,7 @@
 		AC2088AF3099124A00DED3ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				AC2088C03099124A00DED3ED /* DeductionEngine in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -60,6 +65,9 @@
 				AC2088B43099124A00DED3ED /* KmKroner */,
 			);
 			name = KmKroner;
+			packageProductDependencies = (
+				AC2088C23099124A00DED3ED /* DeductionEngine */,
+			);
 			productName = KmKroner;
 			productReference = AC2088B23099124A00DED3ED /* KmKroner.app */;
 			productType = "com.apple.product-type.application";
@@ -88,6 +96,9 @@
 			);
 			mainGroup = AC2088A93099124A00DED3ED;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AC2088C13099124A00DED3ED /* XCLocalSwiftPackageReference "DeductionEngine" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AC2088B33099124A00DED3ED /* Products */;
 			projectDirPath = "";
@@ -343,6 +354,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AC2088C13099124A00DED3ED /* XCLocalSwiftPackageReference "DeductionEngine" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = DeductionEngine;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC2088C23099124A00DED3ED /* DeductionEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DeductionEngine;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC2088AA3099124A00DED3ED /* Project object */;
 	validationLevel = 1;
