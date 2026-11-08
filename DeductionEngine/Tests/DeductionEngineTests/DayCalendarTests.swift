@@ -148,6 +148,43 @@ struct DayCalendarTests {
         #expect(cal.calendar.firstWeekday == Weekday.monday.rawValue)
     }
 
+    // MARK: Independence from the phone's settings
+
+    /// The reason DayCalendar exists: the phone's time zone must not change
+    /// which day a trip belongs to. This swaps the process-wide default time
+    /// zone (what `TimeZone.current` and `Calendar.current` use) to Auckland,
+    /// 12 hours ahead, and checks Copenhagen answers are unchanged.
+    ///
+    /// Changing global state is normally avoided in parallel tests, but it is
+    /// safe here: no correct code in this package reads the default zone, so
+    /// the swap can only expose bugs, never cause false failures.
+    @Test func ignoresDeviceTimeZone() throws {
+        let original = NSTimeZone.default
+        NSTimeZone.default = try #require(TimeZone(identifier: "Pacific/Auckland"))
+        defer { NSTimeZone.default = original }
+
+        // 23:30 on Mon 9 Nov in Copenhagen is already Tue 10 Nov in Auckland.
+        let lateMonday = try instant("2026-11-09T23:30:00+01:00")
+        #expect(Calendar.current.component(.day, from: lateMonday) == 10, "precondition: the swap took effect")
+
+        #expect(cal.dayKey(lateMonday) == "2026-11-09")
+        #expect(cal.startOfDay(lateMonday) == (try instant("2026-11-09T00:00:00+01:00")))
+        #expect(cal.weekday(of: lateMonday) == .monday)
+        #expect(cal.incomeYear(of: try instant("2026-12-31T23:30:00+01:00")) == 2026)
+        #expect(cal.date(fromDayKey: "2026-11-09") == (try instant("2026-11-09T00:00:00+01:00")))
+    }
+
+    @Test func otherTimeZoneGivesDifferentDay() throws {
+        // Same instant, different zone, different day. That's why the zone is pinned.
+        let lateMonday = try instant("2026-11-09T23:30:00+01:00")
+        let utc = DayCalendar(timeZone: .gmt)
+        let auckland = DayCalendar(timeZone: try #require(TimeZone(identifier: "Pacific/Auckland")))
+
+        #expect(utc.dayKey(lateMonday) == "2026-11-09")
+        #expect(auckland.dayKey(lateMonday) == "2026-11-10")
+        #expect(cal.dayKey(lateMonday) == "2026-11-09")
+    }
+
     // MARK: Future days
 
     @Test func isFutureComparesDaysNotTimes() throws {

@@ -30,19 +30,37 @@ calculated at year-end based on km driven per job per day.
   logic or data decisions inside a View body.
 - **Services/** — thin layer between ViewModels and SwiftData/calculations
   (e.g. `TaxCalculationService`). Keeps logic testable and decoupled from
-  persistence.
+  persistence. Services call into `DeductionEngine` for the actual maths.
+- **DeductionEngine** (local Swift package at the repo root) — pure Swift
+  tax maths and date utilities (e.g. `DayCalendar`). No SwiftUI, SwiftData
+  or UIKit imports, so its tests run on the Mac with `swift test` in
+  seconds. Put calculation and date logic here, not in the app's Services/.
 
 ## Folder structure
 ```
-CommuteTracker/
-  App/              → App entry point, root view
-  Models/           → SwiftData @Model classes
-  ViewModels/       → @Observable classes
+KmKroner.xcworkspace  → open this, not KmKroner.xcodeproj (see below)
+KmKroner/             → app target
+  App/                → App entry point, root view
+  Models/             → SwiftData @Model classes
+  ViewModels/         → @Observable classes
   Views/
-    <Feature>/      → one folder per feature (e.g. WorkLog/, Jobs/, Summary/)
-  Services/         → persistence helpers, tax calculation, utilities
+    <Feature>/        → one folder per feature (Today/, Calendar/, Summary/, Settings/)
+  Services/           → persistence helpers, thin wrappers over DeductionEngine
   Extensions/
+  Resources/          → assets, String Catalog, rate tables
+KmKronerTests/        → app unit tests (Swift Testing)
+KmKronerUITests/      → UI tests (XCTest)
+DeductionEngine/      → local package: Sources/ and Tests/ (Swift Testing)
+KmKroner.xctestplan   → all three test bundles, code coverage on
 ```
+
+## Building and testing
+- Open `KmKroner.xcworkspace`. A bare `.xcodeproj` doesn't expose the
+  package's test targets, so ⌘U would skip the engine tests.
+- ⌘U, or: `xcodebuild test -workspace KmKroner.xcworkspace -scheme KmKroner
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+  -parallel-testing-enabled NO`
+- Engine only, no simulator: `cd DeductionEngine && swift test`
 
 ## Conventions
 - Use `@Observable` + `@Bindable`, not `@StateObject`/`@ObservedObject`

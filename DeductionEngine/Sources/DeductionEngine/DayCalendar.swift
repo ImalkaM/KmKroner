@@ -22,7 +22,10 @@ public struct DayCalendar: Sendable {
 
     public let calendar: Calendar
 
-    public init(timeZone: TimeZone = TimeZone(identifier: "Europe/Copenhagen")!) {
+    /// Internal on purpose: the app must use `DayCalendar.copenhagen`, so no
+    /// caller can build a calendar in the phone's (or any other) time zone.
+    /// Tests can still reach it through `@testable import`.
+    init(timeZone: TimeZone = TimeZone(identifier: "Europe/Copenhagen")!) {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone
         calendar.firstWeekday = Weekday.monday.rawValue
