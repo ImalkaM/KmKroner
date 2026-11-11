@@ -465,6 +465,7 @@
 		AC2088E23099124A00DED3ED /* Debug configuration for PBXNativeTarget "KmKronerTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGAJ3TRK78;
@@ -480,7 +481,6 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KmKroner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KmKroner";
 			};
 			name = Debug;
@@ -488,6 +488,7 @@
 		AC2088E33099124A00DED3ED /* Release configuration for PBXNativeTarget "KmKronerTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGAJ3TRK78;
@@ -503,7 +504,6 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KmKroner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KmKroner";
 			};
 			name = Release;

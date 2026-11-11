@@ -21,7 +21,10 @@ calculated at year-end based on km driven per job per day.
   first-party frameworks while learning
 
 ## Architecture: MVVM + @Observable
-- **Models/** — SwiftData `@Model` classes (e.g. `Job`, `WorkEntry`)
+- **Models/** — SwiftData `@Model` classes (`Workplace`, `Trip`, `HomeAddress`).
+  CloudKit-ready: every property defaulted or optional, relationships
+  optional, no unique constraints. Enums are stored as raw Strings. All
+  model types are listed once in `ModelSchema`.
 - **ViewModels/** — `@Observable` classes (NOT `ObservableObject`/`@Published`
   — use the Observation framework). Hold presentation logic, talk to
   Services, expose state to Views.
@@ -48,6 +51,7 @@ KmKroner/             → app target
   Services/           → persistence helpers, thin wrappers over DeductionEngine
   Extensions/
   Resources/          → assets, String Catalog, rate tables
+  PreviewSupport/     → DEBUG-only SampleData PreviewModifier (`.sampleData` trait)
 KmKronerTests/        → app unit tests (Swift Testing)
 KmKronerUITests/      → UI tests (XCTest)
 DeductionEngine/      → local package: Sources/ and Tests/ (Swift Testing)

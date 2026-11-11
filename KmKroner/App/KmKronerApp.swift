@@ -5,21 +5,19 @@
 //  Created by Imalka Muthukumara on 2026-11-02.
 //
 
+import SwiftData
 import SwiftUI
 
+/// App entry point: owns the AppModel and the SwiftData store.
 @main
 struct KmKronerApp: App {
-    // The App struct owns the model. `@State` keeps a single instance alive
-    // for the app's lifetime even though `body` may be re-evaluated. With
-    // @Observable types, `@State` replaces `@StateObject`.
     @State private var appModel = AppModel()
 
     var body: some Scene {
         WindowGroup {
             RootTabView()
-                // Passes the model down by type; any view can read it with
-                // `@Environment(AppModel.self)`. Replaces `.environmentObject`.
                 .environment(appModel)
         }
+        .modelContainer(for: ModelSchema.models)
     }
 }
