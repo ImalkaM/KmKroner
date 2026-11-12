@@ -8,9 +8,12 @@ explain non-obvious decisions as you go, especially around SwiftData,
 something, briefly say why you picked it.
 
 ## What the app does
-Tracks which days the user worked at which job (multiple jobs, e.g. Esmark,
-Wolt courier, Norlax), so the Danish commuting tax deduction can be
-calculated at year-end based on km driven per job per day.
+Tracks which days a user drove to which workplace (multiple jobs, e.g.
+Esmark, Wolt courier, Norlax), so at year-end they have exactly the data
+SKAT's TastSelv asks for: per home address and workplace, the period, days
+of driving per month, km per day (round trip) and toll-bridge crossings.
+The app does not calculate the deduction; SKAT does. Built for anyone in
+Denmark, not one user.
 
 ## Stack
 - iOS 18 minimum deployment target
@@ -31,13 +34,13 @@ calculated at year-end based on km driven per job per day.
 - **Views/<Feature>/** — grouped by feature, not by type. Keep views dumb:
   they read state and forward user actions to the ViewModel. No business
   logic or data decisions inside a View body.
-- **Services/** — thin layer between ViewModels and SwiftData/calculations
-  (e.g. `TaxCalculationService`). Keeps logic testable and decoupled from
-  persistence. Services call into `DeductionEngine` for the actual maths.
+- **Services/** — thin layer between ViewModels and SwiftData (e.g. the
+  stores). Keeps logic testable and decoupled from persistence. Services
+  call into `DeductionEngine` for date and grouping logic.
 - **DeductionEngine** (local Swift package at the repo root) — pure Swift
-  tax maths and date utilities (e.g. `DayCalendar`). No SwiftUI, SwiftData
-  or UIKit imports, so its tests run on the Mac with `swift test` in
-  seconds. Put calculation and date logic here, not in the app's Services/.
+  date utilities (e.g. `DayCalendar`) and grouping trips into TastSelv
+  entries. No SwiftUI, SwiftData or UIKit imports, so its tests run on the
+  Mac with `swift test` in seconds. Put date and grouping logic here, not in the app's Services/.
 
 ## Folder structure
 ```
