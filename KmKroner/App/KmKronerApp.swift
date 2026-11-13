@@ -12,12 +12,23 @@ import SwiftUI
 @main
 struct KmKronerApp: App {
     @State private var appModel = AppModel()
+    /// The opened store, or why it couldn't be opened.
+    private let container: Result<ModelContainer, any Error>
+
+    init() {
+        container = Result { try ModelSchema.makeContainer() }
+    }
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
-                .environment(appModel)
+            switch container {
+            case .success(let container):
+                RootTabView()
+                    .environment(appModel)
+                    .modelContainer(container)
+            case .failure(let error):
+                StoreErrorView(error: error)
+            }
         }
-        .modelContainer(for: ModelSchema.models)
     }
 }

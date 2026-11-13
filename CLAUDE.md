@@ -26,8 +26,10 @@ Denmark, not one user.
 ## Architecture: MVVM + @Observable
 - **Models/** — SwiftData `@Model` classes (`Workplace`, `Trip`, `HomeAddress`).
   CloudKit-ready: every property defaulted or optional, relationships
-  optional, no unique constraints. Enums are stored as raw Strings. All
-  model types are listed once in `ModelSchema`.
+  optional, no unique constraints. Enums are stored as raw Strings. Models
+  live inside `SchemaV1` (type aliases keep the short names); a model change
+  means a new schema version plus a stage in `KmKronerMigrationPlan`.
+  `ModelSchema.makeContainer` builds every container (app, previews, tests).
 - **ViewModels/** — `@Observable` classes (NOT `ObservableObject`/`@Published`
   — use the Observation framework). Hold presentation logic, talk to
   Services, expose state to Views.
