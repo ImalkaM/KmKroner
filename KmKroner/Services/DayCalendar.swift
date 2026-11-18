@@ -1,6 +1,6 @@
 //
 //  DayCalendar.swift
-//  DeductionEngine
+//  KmKroner
 //
 
 import Foundation
@@ -16,15 +16,16 @@ import Foundation
 /// It's a struct holding a configured `Calendar`, rather than an extension on
 /// `Calendar`, so the rules (Gregorian, Europe/Copenhagen, Monday first) are
 /// fixed in one place and can't be skipped by accident.
-public struct DayCalendar: Sendable {
+// nonisolated: the app defaults to MainActor, but this is pure value logic
+// that tests and background work must be able to call from any actor.
+nonisolated struct DayCalendar: Sendable {
     /// The calendar the whole app uses.
-    public static let copenhagen = DayCalendar()
+    static let copenhagen = DayCalendar()
 
-    public let calendar: Calendar
+    let calendar: Calendar
 
-    /// Internal on purpose: the app must use `DayCalendar.copenhagen`, so no
-    /// caller can build a calendar in the phone's (or any other) time zone.
-    /// Tests can still reach it through `@testable import`.
+    /// App code uses `DayCalendar.copenhagen`; the time zone parameter exists
+    /// so tests can prove results don't depend on the device's zone.
     init(timeZone: TimeZone = TimeZone(identifier: "Europe/Copenhagen")!) {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone
@@ -33,7 +34,7 @@ public struct DayCalendar: Sendable {
     }
 
     /// Local midnight at the start of the day `date` falls on.
-    public func startOfDay(_ date: Date) -> Date {
+    func startOfDay(_ date: Date) -> Date {
         calendar.startOfDay(for: date)
     }
 
@@ -42,14 +43,14 @@ public struct DayCalendar: Sendable {
     ///
     /// Built from date components instead of `DateFormatter`, which depends on
     /// locale settings and is relatively expensive to create.
-    public func dayKey(_ date: Date) -> String {
+    func dayKey(_ date: Date) -> String {
         let parts = calendar.dateComponents([.year, .month, .day], from: date)
         return String(format: "%04d-%02d-%02d", parts.year!, parts.month!, parts.day!)
     }
 
     /// The start of the day for a key like "2026-11-09", or `nil` if the key
     /// isn't a real date ("2026-02-30", "2026-13-01", "hello").
-    public func date(fromDayKey key: String) -> Date? {
+    func date(fromDayKey key: String) -> Date? {
         let fields = key.split(separator: "-", omittingEmptySubsequences: false)
         guard fields.count == 3,
               fields[0].count == 4, fields[1].count == 2, fields[2].count == 2,
@@ -65,7 +66,7 @@ public struct DayCalendar: Sendable {
     /// The Danish income year (indkomstår) a date belongs to. It's the
     /// calendar year, but in Copenhagen time: 1 Jan 00:30 in Copenhagen is
     /// still 31 Dec in UTC.
-    public func incomeYear(of date: Date) -> Int {
+    func incomeYear(of date: Date) -> Int {
         calendar.component(.year, from: date)
     }
 
@@ -76,7 +77,7 @@ public struct DayCalendar: Sendable {
     /// seconds: on daylight-saving days a Danish day is 23 or 25 hours long,
     /// so adding fixed seconds drifts away from midnight and can skip or
     /// repeat a day.
-    public func days(in range: ClosedRange<Date>, weekdays: Set<Weekday>) -> [Date] {
+    func days(in range: ClosedRange<Date>, weekdays: Set<Weekday>) -> [Date] {
         guard !weekdays.isEmpty else { return [] }
 
         let first = startOfDay(range.lowerBound)
@@ -97,12 +98,12 @@ public struct DayCalendar: Sendable {
     ///
     /// `now` is a parameter so tests can pin "today" instead of depending on
     /// the real clock.
-    public func isFuture(_ date: Date, now: Date = .now) -> Bool {
+    func isFuture(_ date: Date, now: Date = .now) -> Bool {
         startOfDay(date) > startOfDay(now)
     }
 
     /// The weekday `date` falls on.
-    public func weekday(of date: Date) -> Weekday {
+    func weekday(of date: Date) -> Weekday {
         Weekday(rawValue: calendar.component(.weekday, from: date))!
     }
 }
@@ -110,9 +111,9 @@ public struct DayCalendar: Sendable {
 /// Days of the week, using `Calendar`'s numbering (1 = Sunday … 7 = Saturday)
 /// so values convert directly. Named cases avoid off-by-one mistakes with the
 /// raw numbers.
-public enum Weekday: Int, CaseIterable, Sendable {
+nonisolated enum Weekday: Int, CaseIterable, Sendable {
     case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
 
     /// Monday to Friday.
-    public static let workdays: Set<Weekday> = [.monday, .tuesday, .wednesday, .thursday, .friday]
+    static let workdays: Set<Weekday> = [.monday, .tuesday, .wednesday, .thursday, .friday]
 }

@@ -13,7 +13,7 @@ final class TabBarUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testFourTabsAndSettingsShowsEngineVersion() {
+    func testFourTabsAndSettingsShowsVersion() {
         let app = XCUIApplication()
         app.launch()
 
@@ -23,6 +23,6 @@ final class TabBarUITests: XCTestCase {
         }
 
         tabBar.buttons["Settings"].tap()
-        XCTAssertTrue(app.staticTexts["Engine"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Version"].waitForExistence(timeout: 5))
     }
 }

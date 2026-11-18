@@ -3,7 +3,6 @@
 //  KmKroner
 //
 
-import DeductionEngine
 import Foundation
 import SwiftData
 

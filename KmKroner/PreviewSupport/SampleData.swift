@@ -4,7 +4,6 @@
 //
 
 #if DEBUG
-import DeductionEngine
 import Foundation
 import SwiftData
 import SwiftUI

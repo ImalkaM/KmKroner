@@ -24,14 +24,6 @@
       }
     },
     {
-      "parallelizable": true,
-      "target": {
-        "containerPath": "container:DeductionEngine",
-        "identifier": "DeductionEngineTests",
-        "name": "DeductionEngineTests"
-      }
-    },
-    {
       "target": {
         "containerPath": "container:KmKroner.xcodeproj",
         "identifier": "AC2088E03099124A00DED3ED",

@@ -1,11 +1,11 @@
 //
 //  DayCalendarTests.swift
-//  DeductionEngineTests
+//  KmKronerTests
 //
 
 import Foundation
 import Testing
-@testable import DeductionEngine
+@testable import KmKroner
 
 /// Builds an exact instant from an ISO 8601 string with an explicit UTC
 /// offset, e.g. "2026-03-29T01:30:00+01:00". Tests use this instead of

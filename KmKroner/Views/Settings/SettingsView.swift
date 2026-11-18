@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import DeductionEngine
 
 /// Placeholder for settings (home address, workplaces, etc.).
 struct SettingsView: View {
@@ -12,11 +11,18 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section("About") {
-                    LabeledContent("Engine", value: "v\(EngineInfo.version)")
+                    LabeledContent("Version", value: Bundle.main.appVersion)
                 }
             }
             .navigationTitle("Settings")
         }
+    }
+}
+
+private extension Bundle {
+    /// The app's marketing version, e.g. "1.0".
+    var appVersion: String {
+        infoDictionary?["CFBundleShortVersionString"] as? String ?? "–"
     }
 }
 

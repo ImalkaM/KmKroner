@@ -37,39 +37,35 @@ Denmark, not one user.
   they read state and forward user actions to the ViewModel. No business
   logic or data decisions inside a View body.
 - **Services/** — thin layer between ViewModels and SwiftData (e.g. the
-  stores). Keeps logic testable and decoupled from persistence. Services
-  call into `DeductionEngine` for date and grouping logic.
-- **DeductionEngine** (local Swift package at the repo root) — pure Swift
-  date utilities (e.g. `DayCalendar`) and grouping trips into TastSelv
-  entries. No SwiftUI, SwiftData or UIKit imports, so its tests run on the
-  Mac with `swift test` in seconds. Put date and grouping logic here, not in the app's Services/.
+  stores), plus pure logic: date utilities (`DayCalendar`) and grouping
+  trips into TastSelv entries. Keep the pure logic free of SwiftUI and
+  SwiftData and mark it `nonisolated`, so it stays easy to unit-test and
+  callable off the main actor. One app target, no local packages.
 
 ## Folder structure
 ```
-KmKroner.xcworkspace  → open this, not KmKroner.xcodeproj (see below)
+KmKroner.xcodeproj    → the only project; no workspace
 KmKroner/             → app target
   App/                → App entry point, root view
   Models/             → SwiftData @Model classes
   ViewModels/         → @Observable classes
   Views/
     <Feature>/        → one folder per feature (Today/, Calendar/, Summary/, Settings/)
-  Services/           → persistence helpers, thin wrappers over DeductionEngine
+  Services/           → stores, DayCalendar, TastSelv grouping
   Extensions/
   Resources/          → assets, String Catalog, rate tables
   PreviewSupport/     → DEBUG-only SampleData PreviewModifier (`.sampleData` trait)
 KmKronerTests/        → app unit tests (Swift Testing)
 KmKronerUITests/      → UI tests (XCTest)
-DeductionEngine/      → local package: Sources/ and Tests/ (Swift Testing)
-KmKroner.xctestplan   → all three test bundles, code coverage on
+KmKroner.xctestplan   → both test bundles, code coverage on
 ```
 
 ## Building and testing
-- Open `KmKroner.xcworkspace`. A bare `.xcodeproj` doesn't expose the
-  package's test targets, so ⌘U would skip the engine tests.
-- ⌘U, or: `xcodebuild test -workspace KmKroner.xcworkspace -scheme KmKroner
+- Open `KmKroner.xcodeproj`.
+- ⌘U, or: `xcodebuild test -project KmKroner.xcodeproj -scheme KmKroner
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
   -parallel-testing-enabled NO`
-- Engine only, no simulator: `cd DeductionEngine && swift test`
+- One suite: add `-only-testing:KmKronerTests/DayCalendarTests`
 
 ## Conventions
 - Use `@Observable` + `@Bindable`, not `@StateObject`/`@ObservedObject`
