@@ -110,6 +110,29 @@ struct StoreTests {
         #expect(try tripCount() == 0)
     }
 
+    /// The inverse side must update too, or Today would still show the day as logged.
+    @Test func deletingATripRemovesItFromItsWorkplace() throws {
+        let esmark = try makeWorkplace()
+        guard case .created(let trip) = try stores.trips.logTrip(workplace: esmark, on: .now) else {
+            Issue.record("Expected a new trip"); return
+        }
+
+        try stores.trips.delete(trip)
+
+        #expect(esmark.trips?.isEmpty == true)
+    }
+
+    @Test func tripCountWithoutBridgeKeepsZeroCrossings() throws {
+        let esmark = try makeWorkplace()
+        guard case .created(let trip) = try stores.trips.logTrip(workplace: esmark, on: .now) else {
+            Issue.record("Expected a new trip"); return
+        }
+
+        try stores.trips.setTripCount(3, for: trip)
+
+        #expect(trip.bridgePassages == 0)
+    }
+
     @Test(arguments: [(1, 2), (2, 4), (3, 6), (5, 6)])
     func tripCountKeepsBridgeCrossingsInStep(count: Int, crossings: Int) throws {
         let esmark = try makeWorkplace(bridge: .storebaelt)
@@ -180,6 +203,16 @@ struct StoreTests {
         #expect(throws: WorkplaceStore.StoreError.self) { try stores.workplaces.delete(esmark) }
         try stores.workplaces.archive(esmark)
         #expect(esmark.isArchived)
+        try stores.workplaces.unarchive(esmark)
+        #expect(!esmark.isArchived)
+    }
+
+    @Test func emptyWorkplaceCanBeDeleted() throws {
+        let esmark = try makeWorkplace()
+
+        try stores.workplaces.delete(esmark)
+
+        #expect(try context.fetchCount(FetchDescriptor<Workplace>()) == 0)
     }
 
     @Test func applyKmChangesTripsFromTheDateOnly() throws {
