@@ -8,23 +8,28 @@
 import SwiftData
 import SwiftUI
 
-/// App entry point: owns the AppModel and the SwiftData store.
+/// App entry point: owns the AppModel, the SwiftData store and the stores over it.
 @main
 struct KmKronerApp: App {
     @State private var appModel = AppModel()
-    /// The opened store, or why it couldn't be opened.
-    private let container: Result<ModelContainer, any Error>
+    /// The opened store and its stores, or why it couldn't be opened.
+    // Built once here, not in a view: TripStore remembers the last log for Undo.
+    private let data: Result<(ModelContainer, AppStores), any Error>
 
     init() {
-        container = Result { try ModelSchema.makeContainer() }
+        data = Result {
+            let container = try ModelSchema.makeContainer()
+            return (container, AppStores(container: container))
+        }
     }
 
     var body: some Scene {
         WindowGroup {
-            switch container {
-            case .success(let container):
+            switch data {
+            case .success(let (container, stores)):
                 RootTabView()
                     .environment(appModel)
+                    .stores(stores)
                     .modelContainer(container)
             case .failure(let error):
                 StoreErrorView(error: error)

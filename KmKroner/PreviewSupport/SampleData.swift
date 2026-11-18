@@ -18,7 +18,9 @@ struct SampleData: PreviewModifier {
     }
 
     func body(content: Content, context: ModelContainer) -> some View {
-        content.modelContainer(context)
+        content
+            .stores(AppStores(container: context))
+            .modelContainer(context)
     }
 
     static let firstDayKey = "2026-10-05"

@@ -577,7 +577,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = AC2088AA3099124A00DED3ED /* Project object */;
 	validationLevel = 1;
