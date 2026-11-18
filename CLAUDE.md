@@ -80,5 +80,8 @@ KmKroner.xctestplan   → both test bundles, code coverage on
   touched, new files, data flow) and let me confirm before writing code
 - Build incrementally: one feature at a time (scaffold → model → ViewModel
   → View → wire up → run), not the whole app in one pass
+- Keep each ticket's change to about 250 lines, tests included, so it can be
+  reviewed and learned from in one sitting. Tests ship with the code they
+  test. If a change grows past that, stop and split the ticket.
 - When reviewing existing code, flag non-idiomatic SwiftUI/SwiftData
   patterns even if not directly asked
