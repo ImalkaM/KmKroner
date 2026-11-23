@@ -53,39 +53,6 @@ Views ──@Query (read)──────────────▶ SwiftData
 | `Views/<Feature>/` | one folder per tab: Today, Calendar, Summary, Settings |
 | `PreviewSupport/` | sample data as a `PreviewModifier` (`.sampleData` trait) |
 
-## Design decisions worth a look
-- **A "day" is a Copenhagen day.** A `Date` is an instant, not a day.
-  [`DayCalendar`](KmKroner/Services/DayCalendar.swift) fixes the calendar to
-  Gregorian, Europe/Copenhagen and Monday first. It steps through days with
-  calendar arithmetic, never `+ 86_400` seconds, because daylight-saving
-  days are 23 or 25 hours long. Tests pin both changeover days and check the
-  results don't depend on the device's time zone.
-- **Trips keep the km they were logged with.** Correcting a workplace's
-  distance doesn't rewrite earlier trips. Changing past trips is an explicit
-  action, `WorkplaceStore.applyKm(_:to:from:)`, applied from a chosen date.
-- **Uniqueness without unique constraints.** CloudKit doesn't allow
-  `@Attribute(.unique)`, so [`TripStore`](KmKroner/Services/TripStore.swift)
-  enforces one trip per workplace per day. Logging the same day twice
-  changes nothing, because TastSelv counts days, not taps. Undo removes
-  exactly the trip it logged instead of using `UndoManager`, which would
-  undo whatever changed last.
-- **The CloudKit rules are tests, not comments.**
-  [`SchemaTests`](KmKronerTests/SchemaTests.swift) reads the SwiftData
-  schema and fails if any property lacks a default value, any relationship
-  is required, or anything is unique. Another test reopens a store from
-  disk through the migration plan.
-- **Objective-C delegates under the main-actor default.**
-  [`AddressSearch`](KmKroner/Services/AddressSearch.swift) is an
-  `@Observable NSObject`. Its MapKit delegate methods are `nonisolated` and
-  use `MainActor.assumeIsolated`, because MapKit calls them on the main
-  thread. Typing is debounced by cancelling a `Task`, with no Combine.
-- **A package I took out again.** The date logic started in a local Swift
-  package so its tests could run with `swift test` in seconds. When the
-  scope changed from "calculate the deduction" to "provide SKAT's data",
-  the package no longer justified its cost: a workspace, `public` on every
-  API, and a value-type copy of every model. Moving it into the app target
-  was a deliberate trade-off, recorded in the commit history.
-
 ## How I work on it
 - **Planned as a backlog.** Every change is a ticket with a "Done when"
   checklist: plan, review the plan, build, test, then one commit that
